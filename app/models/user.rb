@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     from_google(access_token.info)
   end
 
+  def can_dispatch? fleet
+    self.memberships.where(fleet: fleet, dispatcher: true).count > 0
+  end
+
   def name
     first_name + " " + last_name
   end

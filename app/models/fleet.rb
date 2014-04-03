@@ -3,4 +3,8 @@ class Fleet < ActiveRecord::Base
   has_many :devices
   has_many :memberships
   has_many :users, through: :memberships
+
+  def dispatch_url
+    ENV['DISPATCH_URL'] + "/#/#{socket_url}"
+  end
 end

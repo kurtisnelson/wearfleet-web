@@ -24,6 +24,21 @@ class DevicesController < ApplicationController
     end
   end
 
+  def edit
+    @device = Device.find(params[:id])
+  end
+
+  def update
+    @device = Device.find(params[:id])
+    if @device.update(device_params)
+      flash[:success] = "Device updated"
+      redirect_to @device
+    else
+      flash[:error] = "Update failed"
+      render 'edit', status: 400
+    end
+  end
+
   private
   def device_params
     params.require(:device).permit(

@@ -2,3 +2,6 @@ h1 = @device.name
 dl
   dt Fleet
   dd = @device.fleet.name
+  dt UUID
+  dd = @device.uuid
+= link_to "Edit", edit_device_path(@device)

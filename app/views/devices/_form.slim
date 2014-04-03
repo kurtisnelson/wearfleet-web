@@ -1,4 +1,4 @@
 = simple_form_for [@device.user, @device] do |f|
   = f.input :name
-  = f.association :fleet, include_blank: false
+  = f.association :fleet, include_blank: false, collection: current_user.fleets
   = f.button :submit, class: 'btn btn-primary'
