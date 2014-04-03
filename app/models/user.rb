@@ -1,10 +1,8 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:google_oauth2, :gplus]
-
+  has_many :devices
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     from_google(access_token.info)
   end
