@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
   def self.find_for_gplus(access_token, signed_in_resource=nil)
     from_google(access_token.info)
   end
+
+  def name
+    first_name + " " + last_name
+  end
 end

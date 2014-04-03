@@ -7,5 +7,7 @@ WearfleetWeb::Application.routes.draw do
    resources :users do
      resources :devices
    end
+
+   resources :devices
    root to: 'home#index'
 end

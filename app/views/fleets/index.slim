@@ -1,0 +1,9 @@
+table.table
+  thead
+    tr
+      th Name
+  tbody
+    - @fleets.each do |fleet|
+      tr
+        td = link_to fleet.name, fleet_path(fleet)
+= link_to "Add Fleet", new_fleet_path

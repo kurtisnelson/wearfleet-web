@@ -1,0 +1,13 @@
+h1 = @user.name
+
+table.table
+  thead
+    tr
+      th Name
+      th Fleet
+      th
+  tbody
+    - @user.devices.each do |device|
+      tr
+        td = link_to device.name, user_device_path(device.user, device)
+        td = device.fleet.name

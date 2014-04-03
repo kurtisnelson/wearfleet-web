@@ -27,8 +27,9 @@ html
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             = active_link_to "Home", root_path, active: :exclusive, wrap_tag: :li
-            = active_link_to "Fleets", fleets_path, wrap_tag: :li
             - if current_user
+              = active_link_to "My Devices", user_devices_path(current_user), wrap_tag: :li
+              = active_link_to "Fleets", fleets_path, wrap_tag: :li
               = active_link_to "Logout", destroy_user_session_path, wrap_tag: :li, method: :delete
 
     .container
