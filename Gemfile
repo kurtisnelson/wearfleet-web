@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.0'
 
+gem 'active_link_to'
 gem 'bootstrap-sass'
 gem 'coffee-rails'
 gem 'devise'
