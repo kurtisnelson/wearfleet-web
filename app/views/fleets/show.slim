@@ -1,5 +1,28 @@
 h1 = @fleet.name
 
+h2 Members
+table.table
+  thead
+    tr
+      th Name
+      th Admin?
+      th Dispatcher?
+      th
+  tbody
+    - @fleet.memberships.each do |member|
+      tr class="#{ member.approved? ? "" : "danger"}"
+        td = member.user.name
+        td = member.admin?
+        td = member.dispatcher?
+        td
+          = link_to "Edit", edit_fleet_membership_path(@fleet, member), class: "btn btn-primary"
+          = link_to "Remove", fleet_membership_path(@fleet, member), method: :delete, class: "btn btn-danger"
+= link_to "Add Member", new_fleet_membership_path(@fleet)
+
+h2 Devices
+p
+  =' @fleet.devices.count
+  | devices
 table.table
   thead
     tr

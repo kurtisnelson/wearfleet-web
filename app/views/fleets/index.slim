@@ -2,8 +2,14 @@ table.table
   thead
     tr
       th Name
+      th Action
   tbody
     - @fleets.each do |fleet|
       tr
         td = link_to fleet.name, fleet_path(fleet)
+        td
+          - if current_user.memberships.where(fleet: fleet).count > 0
+            = link_to "Leave", fleet_leave_path(fleet), class: 'btn btn-danger', method: :put
+          - if current_user.memberships.where(fleet: fleet, approved: false).count > 0
+            = link_to "Approve", fleet_approve_path(fleet), class: 'btn btn-success', method: :put
 = link_to "Add Fleet", new_fleet_path

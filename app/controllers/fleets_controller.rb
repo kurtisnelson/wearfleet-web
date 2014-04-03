@@ -23,6 +23,19 @@ class FleetsController < ApplicationController
     end
   end
 
+  def leave
+    current_user.memberships.where(fleet_id: params[:fleet_id]).destroy_all
+    redirect_to fleets_path
+  end
+
+  def approve
+    current_user.memberships.where(fleet_id: params[:fleet_id]).each do |mem|
+      mem.approved = true
+      mem.save
+    end
+    redirect_to fleets_path
+  end
+
   private
   def fleet_params
     params.require(:fleet).permit(

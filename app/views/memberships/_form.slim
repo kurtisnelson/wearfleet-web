@@ -1,0 +1,5 @@
+= simple_form_for [@membership.fleet, @membership] do |f|
+  = f.association :user
+  = f.input :admin
+  = f.input :dispatcher
+  = f.button :submit, class: 'btn btn-primary'

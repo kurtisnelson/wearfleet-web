@@ -1,1 +1,9 @@
 h1 Welcome to WearFleet
+
+h2 My Fleets
+- if current_user.fleets.empty?
+  p None. Ask your administrator to add you.
+- else
+  ul
+    - current_user.fleets.each do |fleet|
+      li = fleet.name

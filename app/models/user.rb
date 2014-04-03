@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:google_oauth2, :gplus]
   has_many :devices
+  has_many :memberships
+  has_many :owned_fleets, foreign_key: "owner_id", class_name: "Fleet"
+  has_many :fleets, through: :memberships
+
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     from_google(access_token.info)
   end
