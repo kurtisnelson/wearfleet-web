@@ -7,5 +7,5 @@ table.table
     - @devices.each do |device|
       tr
         td = link_to device.name, device_path(device)
-        td = device.fleet.name
+        td = device.fleet_name
 = link_to "Add Device", new_device_path

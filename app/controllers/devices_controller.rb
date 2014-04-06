@@ -1,10 +1,10 @@
 class DevicesController < ApplicationController
   def index
-    @devices = Device.all
+    @devices = DeviceDecorator.decorate_collection Device.all
   end
 
   def show
-    @device = Device.find(params[:id])
+    @device = Device.find(params[:id]).decorate
   end
 
   def new
