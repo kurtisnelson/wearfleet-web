@@ -8,6 +8,9 @@ WearfleetWeb::Application.routes.draw do
   end
 
   resources :users do
+    collection do
+      post :pusher_auth
+    end
     resources :devices
   end
 

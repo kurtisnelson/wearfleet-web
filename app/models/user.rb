@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :owned_fleets, foreign_key: "owner_id", class_name: "Fleet"
   has_many :fleets, through: :memberships
+  before_save :ensure_authentication_token
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     from_google(access_token.info)
@@ -37,5 +38,20 @@ class User < ActiveRecord::Base
 
   def name
     first_name + " " + last_name
+  end
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+
+  private
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
   end
 end
