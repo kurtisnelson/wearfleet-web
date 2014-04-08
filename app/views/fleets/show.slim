@@ -1,6 +1,6 @@
 h1 = @fleet.name
 - if current_user.can_dispatch?(@fleet)
-  = link_to "Dispatch", @fleet.dispatch_url, class: 'btn btn-primary', target: "_blank"
+  = link_to "Dispatch", fleet_watch_url(@fleet), class: 'btn btn-primary', target: "_blank"
 
 h2 Members
 table.table

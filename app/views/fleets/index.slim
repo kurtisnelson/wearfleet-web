@@ -9,7 +9,7 @@ table.table
         td = link_to fleet.name, fleet_path(fleet)
         td
           - if current_user.can_dispatch?(fleet)
-            = link_to "Dispatch", fleet.dispatch_url, class: 'btn btn-primary', target: "_blank"
+            = link_to "Dispatch", fleet_watch_url(fleet), class: 'btn btn-primary', target: "_blank"
           - if current_user.memberships.where(fleet: fleet).count > 0
             = link_to "Leave", fleet_leave_path(fleet), class: 'btn btn-danger', method: :put
           - if current_user.memberships.where(fleet: fleet, approved: false).count > 0

@@ -3,6 +3,7 @@ WearfleetWeb::Application.routes.draw do
   resources :fleets do
     resources :devices
     resources :memberships
+    get :watch
     put :leave
     put :approve
   end

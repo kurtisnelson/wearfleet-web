@@ -1,0 +1,11 @@
+- content_for :header do
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true", "http://js.pusher.com/2.1/pusher.min.js", "watch"
+
+javascript:
+  window.pusher_key = "#{j ENV['PUSHER_KEY']}"
+  window.fleet_id = "#{@fleet.id}"
+label for="message" Message:
+input type="text" name="message" id="message"
+button#all Send to All
+#map-canvas.row
+img#camera alt="camera feed"

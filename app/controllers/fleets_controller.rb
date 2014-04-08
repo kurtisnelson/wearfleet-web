@@ -23,6 +23,10 @@ class FleetsController < ApplicationController
     end
   end
 
+  def watch
+    @fleet = Fleet.find(params[:fleet_id])
+  end
+
   def leave
     current_user.memberships.where(fleet_id: params[:fleet_id]).destroy_all
     redirect_to fleets_path

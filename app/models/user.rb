@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     first_name + " " + last_name
   end
 
+  def device_ids
+    return [] unless devices
+    devices.pluck(:id)
+  end
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
