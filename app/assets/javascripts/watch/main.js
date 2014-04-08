@@ -24,22 +24,12 @@ $(document).ready( function () {
     });
    
     fleetChannel.bind('pusher:subscription_succeeded', function(members) {
-      members.each(function(member) {
-              console.log(JSON.stringify(member));
-        $.each(member.info.devices, function(device) {
-                if(nodes[device] == null){
-                    nodes[device] = new Node(pusher, device, member);
-                }
-        });
-      });
+            console.log(members.members);
+            $.each(members.members, addMember);
     });
 
     fleetChannel.bind('pusher:member_added', function(member) {
-      $.each(member.info.devices, function(device) {
-              if(nodes[device] == null){
-                      nodes[device] = new Node(pusher, device, member);
-              }
-      });
+      addMember(member);
     });
 
     //WS.subscribe("nodes:camera", function(channel, node, data) {
@@ -50,11 +40,21 @@ $(document).ready( function () {
     //WS.subscribe("notifications", function(channel, node, data) {
     //    console.log("MSG from " + node + ": "+data);
     //});
-
+    //
     $("button#all").click(function () {
         WS.publish("notifications:all", $("input#message").val());
     });
 });
+
+function addMember(member) {
+                if(member.indexOf('-') != -1){
+                    device = member.split('-')[1]
+                    if(nodes[device] == null){
+                        console.log("inserting a node for "+device);
+                        nodes[device] = new Node(pusher, device, member);
+                    }
+                }
+}
 
 function showPosition(position) {
     var myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

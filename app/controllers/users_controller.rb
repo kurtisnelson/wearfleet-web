@@ -23,8 +23,7 @@ class UsersController < ApplicationController
           user_id: id,
           user_info: {
             name: current_user.name,
-            email: current_user.email,
-            devices: current_user.device_ids
+            email: current_user.email
           }
         })
       end
