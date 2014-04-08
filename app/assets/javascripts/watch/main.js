@@ -41,8 +41,9 @@ $(document).ready( function () {
 
     $("#chat button").click(function() {
             var msg = $("#chat input[name=message]").val();
-            console.log(msg);
-            fleetChannel.trigger('client-all', {'message': msg});
+            data = {'name': current_user.name, 'message': msg};
+            addMessage(data);
+            fleetChannel.trigger('client-all', data);
     });
 
     fleetChannel.bind('client-all', addMessage);
@@ -57,7 +58,7 @@ $(document).ready( function () {
 });
 
 function addMessage(data) {
-    $("#chat #room").append("<li>" + data.message + "</li>");
+    $("#chat #room").append("<li>" + data.name + ": " + data.message + "</li>");
 }
 
 function addMember(member) {
