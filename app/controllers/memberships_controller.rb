@@ -33,6 +33,18 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @membership = Membership.find(params[:id])
+    fleet = @membership.fleet
+    if @membership.destroy
+      flash[:success] = "Membership deleted"
+      redirect_to fleet
+    else
+      flash[:error] = "Deletion failed"
+      redirect_to fleet
+    end
+  end
+
   private
   def membership_params
     params.require(:membership).permit(
