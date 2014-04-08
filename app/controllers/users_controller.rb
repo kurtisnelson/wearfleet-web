@@ -11,19 +11,23 @@ class UsersController < ApplicationController
 
   def pusher_auth
     if current_user
-      id = current_user.id.to_s
-      if params[:device_id] && current_user.device_ids.include?(Integer(params[:device_id]))
-        id += "-"
-        id += params[:device_id]
+      if params[:channel_name].starts_with? 'private'
+        response = Pusher[params[:channel_name]].authenticate(params[:socket_id])
+      else
+        id = current_user.id.to_s
+        if params[:device_id] && current_user.device_ids.include?(Integer(params[:device_id]))
+          id += "-"
+          id += params[:device_id]
+        end
+        response = Pusher[params[:channel_name]].authenticate(params[:socket_id], {
+          user_id: id,
+          user_info: {
+            name: current_user.name,
+            email: current_user.email,
+            devices: current_user.device_ids
+          }
+        })
       end
-      response = Pusher[params[:channel_name]].authenticate(params[:socket_id], {
-        user_id: id,
-        user_info: {
-          name: current_user.name,
-          email: current_user.email,
-          devices: current_user.device_ids
-        }
-      })
       render :json => response
     else
       render :text => "Forbidden", :status => '403'
