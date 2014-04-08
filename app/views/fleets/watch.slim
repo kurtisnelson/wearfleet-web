@@ -4,8 +4,14 @@
 javascript:
   window.pusher_key = "#{j ENV['PUSHER_KEY']}"
   window.fleet_id = "#{@fleet.id}"
-label for="message" Message:
-input type="text" name="message" id="message"
-button#all Send to All
-#map-canvas.row
+
+.row
+  #chat.col-md-4
+    h3#status
+      span.count 0
+      |  Online Users
+    ul#room
+    input type="text" name="message" id="message"
+    button name="say" Say
+  #map-canvas.col-md-8
 img#camera alt="camera feed"
