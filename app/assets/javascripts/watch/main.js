@@ -22,10 +22,9 @@ $(document).ready( function () {
     fleetChannel.bind('pusher:subscription_error', function(status) {
             alert("Error!\n"+status);
     });
-   
+
     fleetChannel.bind('pusher:subscription_succeeded', function(members) {
             members.each(function(member) {
-                    console.log(member);
                     addMember(member);
             });
     });

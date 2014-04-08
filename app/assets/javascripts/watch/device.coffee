@@ -1,13 +1,13 @@
 class Device
         constructor: (pusher, device, member) ->
                 @_member = member
-                @renderMarker()
                 @_deviceChannel = pusher.subscribe('private-device_'+device)
                 @_deviceChannel.bind 'client-location', (data) =>
                         myPos = new google.maps.LatLng(data.latitude, data.longitude)
                         @setPosition(myPos)
                 @_deviceChannel.bind 'client-bearing', (data) =>
                         @setRotation(data.bearing)
+                @renderMarker()
 
         setPosition: (newPos) =>
                 @_position = newPos
@@ -22,8 +22,9 @@ class Device
         renderMarker: =>
                 if(@_marker != undefined)
                         @_marker.setMap(null)
+                name = @_member.info.name
                 @_marker = new google.maps.Marker({
-                        title: @_member.name,
+                        title: name,
                         map: map,
                         position: @_position,
                         icon: {
@@ -33,7 +34,7 @@ class Device
                         }
                 })
                 infowindow = new google.maps.InfoWindow({
-                        content: @_member.name
+                        content: name + "<br/>" + @_member.info.email
                 })
                 google.maps.event.addListener @_marker, 'click', ->
                         infowindow.open(map,this)
