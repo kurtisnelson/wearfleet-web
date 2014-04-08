@@ -24,8 +24,10 @@ $(document).ready( function () {
     });
    
     fleetChannel.bind('pusher:subscription_succeeded', function(members) {
-            console.log(members.members);
-            $.each(members.members, addMember);
+            members.each(function(member) {
+                    console.log(member);
+                    addMember(member);
+            });
     });
 
     fleetChannel.bind('pusher:member_added', function(member) {
@@ -47,11 +49,10 @@ $(document).ready( function () {
 });
 
 function addMember(member) {
-                if(member.indexOf('-') != -1){
-                    device = member.split('-')[1]
+                if(member.id.indexOf('-') != -1){
+                    device = member.id.split('-')[1]
                     if(nodes[device] == null){
-                        console.log("inserting a node for "+device);
-                        nodes[device] = new Node(pusher, device, member);
+                        nodes[device] = new Device(pusher, device, member);
                     }
                 }
 }
