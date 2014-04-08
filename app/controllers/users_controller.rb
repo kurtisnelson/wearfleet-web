@@ -11,8 +11,8 @@ class UsersController < ApplicationController
 
   def pusher_auth
     if current_user
-      id = current_user.id
-      if current_user.device_ids.include? params[:device_id]
+      id = current_user.id.to_s
+      if params[:device_id] && current_user.device_ids.include?(Integer(params[:device_id]))
         id += "-"
         id += params[:device_id]
       end
