@@ -12,12 +12,12 @@ class Device
         setPosition: (newPos) =>
                 @_position = newPos
                 if(@_marker == undefined)
-                        renderMarker()
+                        @renderMarker()
                 @_marker.setPosition(@_position)
 
         setRotation: (rotation) =>
                 @_bearing = rotation
-                renderMarker()
+                @renderMarker()
 
         renderMarker: =>
                 if(@_marker != undefined)
