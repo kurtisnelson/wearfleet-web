@@ -1,7 +1,7 @@
 h1 Welcome to WearFleet
 
-h2 Authenticate a Device
-== current_user.authentication_token.to_qr_image(size: "200x200")
+h2 Setup a Device
+= current_user.decorate.auth_qr_image
 = link_to "Revoke all Devices", user_token_path(current_user), method: :delete, class: 'btn btn-danger'
 
 h2 My Fleets
