@@ -12,6 +12,7 @@ WearfleetWeb::Application.routes.draw do
     collection do
       post :pusher_auth
     end
+    delete :token
     resources :devices
   end
 

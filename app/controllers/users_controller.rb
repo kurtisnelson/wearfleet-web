@@ -32,4 +32,16 @@ class UsersController < ApplicationController
       render :text => "Forbidden", :status => '403'
     end
   end
+
+  def token
+    @user = User.find(params[:user_id])
+    @user.authentication_token = nil
+    if @user.save
+      flash[:success] = "Authentication reset"
+      redirect_to :back
+    else
+      flash[:error] = "Reset failed"
+      redirect_to :back
+    end
+  end
 end

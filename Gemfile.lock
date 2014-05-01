@@ -84,6 +84,7 @@ GEM
       dotenv (>= 0.7)
       thor (>= 0.13.6)
     forgery (0.5.0)
+    google-qr (0.2.2)
     hashie (2.0.5)
     hike (1.2.3)
     httpclient (2.3.4.1)
@@ -249,6 +250,7 @@ DEPENDENCIES
   factory_girl_rails
   foreman
   forgery
+  google-qr
   jquery-rails
   launchy
   omniauth-gplus
